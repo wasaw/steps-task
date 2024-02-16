@@ -1,14 +1,30 @@
 <script>
+import axios from "axios"
 
+export default {
+    data() {
+        return {
+            clinics: []
+        }
+    },
+    mounted() {
+        axios.get('https://dev-app.rnova.org/api/public/getClinics/?api_key=8471e36fd1d7d22996278025475d6593')
+        .then(res => res.data)
+        .then(result => {
+            this.clinics = result.data
+        })
+    },
+    methods: {
+
+    }
+}
 </script>
 
 <template>
     <main>
         <h2>Шаг 1: Выбор клиники</h2>
-        <div class="buttons">
-            <button>Клиника 1</button>
-            <button>Клиника 2</button>
-            <button>Клиника 3</button>
+        <div class="buttons" v-for="clinic in clinics" :key="clinic.id" :router-link="`/home/${clinic.id}`">
+            <button>{{ clinic.title }}</button>
         </div>
     </main>
 </template>
