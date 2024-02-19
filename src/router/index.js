@@ -6,11 +6,11 @@ const routes = [
         name: 'Clinics',
         component: () => import('../pages/Clinics.vue')
     }, 
-    // {
-    //     path: '/doctors',
-    //     name: 'doctors',
-    //     component: () => import('../pages/Doctors.vue')
-    // }
+    {
+        path: '/doctors',
+        name: 'doctors',
+        component: () => import('../pages/Doctors.vue')
+    }
 ]
 
 const router = createRouter({

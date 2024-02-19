@@ -18,6 +18,11 @@ export default {
             this.clinics = result.data
         })
     },
+    methods: {
+        transition(clinic) {
+            router.push({name: 'doctors', params: { id: clinic.id}})
+        }
+    }
 }
 </script>
 
@@ -25,7 +30,7 @@ export default {
     <main>
         <h2>Шаг 1: Выбор клиники</h2>
         <div class="buttons" v-for="clinic in clinics" :key="clinic.id">
-            <button>{{ clinic.title }}</button>
+            <button @click="transition(clinic)">{{ clinic.title }}</button>
         </div>
     </main>
 </template>
