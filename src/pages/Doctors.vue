@@ -5,15 +5,19 @@
         class="buttons" 
         v-for="user in users" 
         :key="user.id">
-            <button>{{ user.name }}</button>
+            <button @click="transition">{{ user.name }}</button>
         </div>
     </main>
 </template>
 
 <script>
 import axios from 'axios';
+import router from "@/router"
 
 export default {
+    components: {
+        router
+    },
     data() {
         return {
             users: []
@@ -25,6 +29,11 @@ export default {
         .then(result => {
             this.users = result.data.filter(element => element.clinic.includes(this.$route.params.id))
         })
+    },
+    methods: {
+        transition() {
+            router.push({ name: 'credential'})
+        }
     }
 }
 </script>
