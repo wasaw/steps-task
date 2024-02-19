@@ -15,6 +15,11 @@ const routes = [
         path: '/credential',
         name: 'credential',
         component: () => import('../pages/Credential.vue')
+    },
+    {
+        path: '/verifications',
+        name: 'verifications',
+        component: () => import('../pages/Verification.vue')
     }
 ]
 

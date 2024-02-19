@@ -20,7 +20,7 @@ export default {
     },
     methods: {
         transition(clinic) {
-            router.push({name: 'doctors', params: { id: clinic.id}})
+            router.push({name: 'doctors', params: { id: clinic.id, title: clinic.title }})
         }
     }
 }

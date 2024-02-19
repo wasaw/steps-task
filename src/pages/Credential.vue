@@ -1,7 +1,7 @@
 <template>
     <main>
         <form action="">
-            <input type="text" placeholder="Имя" v-model="client.fistname"/>
+            <input type="text" placeholder="Имя" v-model="client.firstname"/>
             <input type="text" placeholder="Фамилия" v-model="client.lastname" />
             <input type="text" placeholder="Отчество" v-model="client.thirdname" />
             <input type="tel" placeholder="Номер телефона" v-model="client.phone" />
@@ -13,22 +13,38 @@
 </template>
 
 <script>
+import router from '@/router';
+
 export default {
+    components: {
+        router
+    },
     data() {
         return {
             client: {
-                fistname: "",
+                firstname: "",
                 lastname: "",
                 thirdname: "",
                 phone: "",
                 date: "",
                 email: ""
-            }
+            },
         }
     },
     methods: {
         transition() {
-            
+            router.push({ 
+                name: 'verifications', 
+                params: { 
+                    title: this.$route.params.title, 
+                    doctor: this.$route.params.doctor, 
+                    firstname: this.client.firstname,
+                    lastname: this.client.lastname, 
+                    thirdname: this.client.thirdname, 
+                    phone: this.client.phone, 
+                    date: this.client.date, 
+                    email: this.client.email
+            }})
         }
     }
 }
