@@ -8,6 +8,7 @@ export const useDoctorsStore = defineStore('DoctorsStore', {
         doctors: [],
         selectedDoctor: '',
     }),
+    persist: true,
 
     // actions
 

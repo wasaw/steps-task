@@ -8,6 +8,7 @@ export const useClientStore = defineStore('ClientStore', {
             client: "",
         }
     },
+    persist: true,
 
     // actions
 
