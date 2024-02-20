@@ -1,7 +1,7 @@
 <script>
 import axios from "axios"
 import router from "@/router"
-import { useDoctorsStore } from "@/stores/DoctorsStore"
+import { useStore } from "@/stores/Store"
 
 export default {
     data() {
@@ -10,9 +10,9 @@ export default {
         }
     },
     setup() {
-        const doctorsStore = useDoctorsStore()
+        const store = useStore()
         return {
-            doctorsStore
+            store
         }
     },
     mounted() {
@@ -21,10 +21,11 @@ export default {
             .then(result => {
                 this.clinics = result.data
             })
-        this.doctorsStore.fill()
+        this.store.fill()
     },
     methods: {
-        transition(clinic) {
+        onClickClinic(clinic) {
+            this.store.saveClinic(clinic)
             router.push({name: 'doctors', params: { id: clinic.id }})
         }
     }
@@ -35,7 +36,7 @@ export default {
     <main>
         <h2>Шаг 1: Выбор клиники</h2>
         <div class="buttons" v-for="clinic in clinics" :key="clinic.id">
-            <button @click="transition(clinic)">{{ clinic.title }}</button>
+            <button @click="onClickClinic(clinic)">{{ clinic.title }}</button>
         </div>
     </main>
 </template>

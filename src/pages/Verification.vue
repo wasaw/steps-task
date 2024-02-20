@@ -3,51 +3,47 @@
         <h2>Пожалуйста, проверьте выбранные данные</h2>
         <div>
             <h3>Клиника</h3>
-            <label>{{ doctorsStore.selectedDoctor.clinic_titles }}</label>
+            <label>{{ store.clinicTitle }}</label>
         </div>
         <div>
             <h3>Врач</h3>
-            <label>{{ doctorsStore.selectedDoctor.name }}</label>
+            <label>{{ store.selectedDoctor.name }}</label>
         </div>
         <div>
             <h3>Фамилия</h3>
-            <label>{{ clientStore.client.lastname }}</label>
+            <label>{{ store.client.lastname }}</label>
         </div>
         <div>
             <h3>Имя</h3>
-            <label>{{ clientStore.client.firstname }}</label>
+            <label>{{ store.client.firstname }}</label>
         </div>
         <div>
             <h3>Отчество</h3>
-            <label>{{ clientStore.client.thirdname }}</label>
+            <label>{{ store.client.thirdname }}</label>
         </div>
         <div>
             <h3>Телефон</h3>
-            <label>{{ clientStore.client.thirdname }}</label>
+            <label>{{ store.client.thirdname }}</label>
         </div>
         <div>
             <h3>Дата</h3>
-            <label>{{ clientStore.client.date }}</label>
+            <label>{{ store.client.date }}</label>
         </div>
         <div>
             <h3>Почта</h3>
-            <label>{{ clientStore.client.email }}</label>
+            <label>{{ store.client.email }}</label>
         </div>
     </main>
 </template>
 
 <script>
-import router from '@/router';
-import { useClientStore } from '@/stores/ClientStore';
-import { useDoctorsStore } from '@/stores/DoctorsStore';
+import { useStore } from '@/stores/Store';
 
 export default {
     setup() {
-        const clientStore = useClientStore()
-        const doctorsStore = useDoctorsStore()
+        const store = useStore()
         return {
-            clientStore,
-            doctorsStore
+            store,
         }
     },
 }

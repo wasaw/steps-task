@@ -1,13 +1,17 @@
 import { defineStore } from "pinia";
 import axios from "axios";
 
-export const useDoctorsStore = defineStore('DoctorsStore', {
+export const useStore = defineStore('useStore', {
     // state
 
-    state: () => ({
-        doctors: [],
-        selectedDoctor: '',
-    }),
+    state: () => {
+        return {
+            clinicTitle: "",
+            doctors: '',
+            selectedDoctor: '',
+            client: "",
+        }
+    },
     persist: true,
 
     // actions
@@ -23,8 +27,14 @@ export const useDoctorsStore = defineStore('DoctorsStore', {
         filter(id) {
             return this.doctors.filter(element => element.clinic.includes(id))
         },
-        save(doctor) {
+        saveDoctor(doctor) {
             this.selectedDoctor = doctor
+        },
+        saveClient(client) {
+            this.client = client
+        },
+        saveClinic(clinic) {
+            this.clinicTitle = clinic.title
         }
     }
 })

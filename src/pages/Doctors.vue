@@ -12,7 +12,7 @@
 
 <script>
 import router from "@/router"
-import { useDoctorsStore } from '../stores/DoctorsStore'
+import { useStore } from '../stores/Store'
 
 export default {
     data() {
@@ -21,17 +21,17 @@ export default {
         }
     },
     setup() {
-        const doctorsStore = useDoctorsStore()
+        const store = useStore()
         return {
-            doctorsStore
+            store
         }
     },
     mounted() {
-        this.doctors = this.doctorsStore.filter(this.$route.params.id)
+        this.doctors = this.store.filter(this.$route.params.id)
     },
     methods: {
         onClickDoctor(doctor) {
-            this.doctorsStore.save(doctor)
+            this.store.saveDoctor(doctor)
             router.push({ name: 'credential' })
         }
     }

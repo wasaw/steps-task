@@ -14,7 +14,7 @@
 
 <script>
 import router from '@/router';
-import { useClientStore } from '../stores/ClientStore'
+import { useStore } from '../stores/Store'
 
 export default {
     data() {
@@ -30,14 +30,14 @@ export default {
         }
     },
     setup() {
-        const clientStore = useClientStore()
+        const store = useStore()
         return {
-            clientStore
+            store
         }
     },
     methods: {
         onClickClient() {
-            this.clientStore.save(this.client)
+            this.store.saveClient(this.client)
             router.push({ name: 'verifications' })
         }
     }
