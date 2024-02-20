@@ -1,26 +1,31 @@
 <script>
 import axios from "axios"
 import router from "@/router"
+import { useDoctorsStore } from "@/stores/DoctorsStore"
 
 export default {
-    components: {
-        router
-    },
     data() {
         return {
             clinics: []
         }
     },
+    setup() {
+        const doctorsStore = useDoctorsStore()
+        return {
+            doctorsStore
+        }
+    },
     mounted() {
         axios.get('https://dev-app.rnova.org/api/public/getClinics/?api_key=8471e36fd1d7d22996278025475d6593')
-        .then(res => res.data)
-        .then(result => {
-            this.clinics = result.data
-        })
+            .then(res => res.data)
+            .then(result => {
+                this.clinics = result.data
+            })
+        this.doctorsStore.fill()
     },
     methods: {
         transition(clinic) {
-            router.push({name: 'doctors', params: { id: clinic.id, title: clinic.title }})
+            router.push({name: 'doctors', params: { id: clinic.id }})
         }
     }
 }

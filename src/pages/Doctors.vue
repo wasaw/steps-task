@@ -5,34 +5,34 @@
         class="buttons" 
         v-for="doctor in doctors" 
         :key="doctor.id">
-            <button @click="transition(doctor)">{{ doctor.name }}</button>
+            <button @click="onClickDoctor(doctor)">{{ doctor.name }}</button>
         </div>
     </main>
 </template>
 
 <script>
-import axios from 'axios';
 import router from "@/router"
+import { useDoctorsStore } from '../stores/DoctorsStore'
 
 export default {
-    components: {
-        router
-    },
     data() {
         return {
             doctors: []
         }
     },
+    setup() {
+        const doctorsStore = useDoctorsStore()
+        return {
+            doctorsStore
+        }
+    },
     mounted() {
-        axios.get('https://dev-app.rnova.org/api/public/getUsers/?api_key=8471e36fd1d7d22996278025475d6593')
-        .then(res => res.data)
-        .then(result => {
-            this.doctors = result.data.filter(element => element.clinic.includes(this.$route.params.id))
-        })
+        this.doctors = this.doctorsStore.filter(this.$route.params.id)
     },
     methods: {
-        transition(doctor) {
-            router.push({ name: 'credential', params: { title: this.$route.params.title, doctor: doctor.name}})
+        onClickDoctor(doctor) {
+            this.doctorsStore.save(doctor)
+            router.push({ name: 'credential' })
         }
     }
 }

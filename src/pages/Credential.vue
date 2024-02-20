@@ -8,17 +8,15 @@
             <input type="date" placeholder="Дата рождения" v-model="client.date" />
             <input type="email" placeholder="Почта" v-model="client.email" />
         </form>
-        <button @click="transition">Отправить</button>
+        <button @click="onClickClient">Отправить</button>
     </main>
 </template>
 
 <script>
 import router from '@/router';
+import { useClientStore } from '../stores/ClientStore'
 
 export default {
-    components: {
-        router
-    },
     data() {
         return {
             client: {
@@ -31,20 +29,16 @@ export default {
             },
         }
     },
+    setup() {
+        const clientStore = useClientStore()
+        return {
+            clientStore
+        }
+    },
     methods: {
-        transition() {
-            router.push({ 
-                name: 'verifications', 
-                params: { 
-                    title: this.$route.params.title, 
-                    doctor: this.$route.params.doctor, 
-                    firstname: this.client.firstname,
-                    lastname: this.client.lastname, 
-                    thirdname: this.client.thirdname, 
-                    phone: this.client.phone, 
-                    date: this.client.date, 
-                    email: this.client.email
-            }})
+        onClickClient() {
+            this.clientStore.save(this.client)
+            router.push({ name: 'verifications' })
         }
     }
 }
